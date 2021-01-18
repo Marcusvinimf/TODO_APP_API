@@ -7,6 +7,11 @@ module.exports = (app)=>{
         })
 
         app.post(`/${tar}`, (req, res) => {
-                res.send(`Rota POST de ${tar} ativada: ${tar} adicionado ao banco de dados`)
+                console.log(`Corpo da requisição: ${req.body.nome}`)
+                res.send("OK");
         })
 };
+
+// app.post(`/${tar}`, (req, res) => {
+//         res.send(`Rota POST de ${tar} ativada: ${tar} adicionado ao banco de dados`)
+// })
