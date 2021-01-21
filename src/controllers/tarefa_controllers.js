@@ -1,17 +1,29 @@
 const tar = 'tarefas';
 
-module.exports = (app)=>{ 
-        
+const Tarefas = require('../models/tarefas_models')
+
+module.exports = (app, bd )=>{ 
         app.get(`/${tar}`, (req, res) => {
-                res.send(`Rota ativada com GET e recurso ${tar}: valores de ${tar} devem ser retornados`)
+                res.send(bd.tarefas)
         })
 
+        app.get(`/${tar}/:status`, (req, res) =>{
+
+                let resultado = [];
+
+                for(let trf of bd.tarefas)
+                {
+
+                        if(trf._status == req.params.status) resultado.push(trf)
+                }
+
+                resultado != 0 ? res.send(resultado) : res.send("Tarefa não encontrado");
+        })
+        
         app.post(`/${tar}`, (req, res) => {
-                console.log(`Corpo da requisição: ${req.body.nome}`)
-                res.send("OK");
+                const taref = new Tarefas(req.body.titulo, req.body.descricao, req.body.status, req.body.dataDeCriacao);
+                bd.tarefas.push(taref);
+                console.log(bd);
+                res.send("OK!!!")
         })
 };
-
-// app.post(`/${tar}`, (req, res) => {
-//         res.send(`Rota POST de ${tar} ativada: ${tar} adicionado ao banco de dados`)
-// })

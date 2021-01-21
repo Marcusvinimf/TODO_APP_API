@@ -1,11 +1,30 @@
 const usu = 'usuarios';
 
-module.exports = (app)=>{ 
+const Usuarios = require('../models/usuarios_models');
+
+module.exports = (app, bd )=>{ 
         app.get(`/${usu}`, (req, res) => {
-                res.send(`Rota ativada com GET e recurso ${usu}: valores de ${usu} devem ser retornados`)
+                res.send(bd.usuarios);
+        })
+
+        app.get(`/${usu}/:email`, (req, res) =>{
+
+                let resultado = [];
+
+                for(let usr of bd.usuarios)
+                {
+
+                        if(usr._email == req.params.email) resultado.push(usr);
+                }
+
+                resultado != 0 ? res.send(resultado) : res.send("Usuario não encontrado");
         })
         
         app.post(`/${usu}`, (req, res) => {
-                res.send(`Rota POST de ${usu} ativada: ${usu} adicionado ao banco de dados`)
+                const user = new Usuarios(req.body.nome, req.body.email, req.body.senha);
+                bd.usuarios.push(user);
+                console.log(bd);
+                res.send("OK!!!");
         })
+
 };
