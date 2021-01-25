@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const usuariosControllers = require('./controllers/usuario_controllers');
 const tarefasControllers = require('./controllers/tarefa_controllers');
@@ -16,5 +16,5 @@ usuariosControllers(app, dataBase);
 tarefasControllers(app, dataBase);
 
 app.listen(port, () => {
-    console.log(`Tudo sendo ouvido corretamente, confira: http://localhost:${port}`)
-})
+    console.log(`Tudo sendo ouvido corretamente, confira: http://localhost:${port}`);
+});
