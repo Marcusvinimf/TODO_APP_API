@@ -1,50 +1,81 @@
 const usu = 'usuarios';
 
-const Usuarios = require('../models/usuarios_models');
+const UsuariosDao = require('../DAO/usuario_dao');
 
-module.exports = (app, bd )=>{ 
-        
-        app.get(`/${usu}`, (req, res) => res.send(bd.usuarios));
+module.exports = (app, bd) => 
+{
+	const usuariosDao = new UsuariosDao(bd);
 
-        app.get(`/${usu}/:email`, (req, res) =>{
+	app.get(`/${usu}`, (req, res) => 
+	{
+		listaUser();
+		async function listaUser()
+		{
+			try{
+				const usuariosRetorno = await usuariosDao.listaUsuarios();
+				res.status(200).send(usuariosRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                let resultado = [];
+	app.get(`/${usu}/:id`, (req, res) => 
+	{
+		unicoUser();
+		async function unicoUser()
+		{
+			try{
+				const usuariosRetorno = await usuariosDao.buscaUnicaUsuarios(req.params.id);
+				res.status(200).send(usuariosRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                for(let usr of bd.usuarios)
-                {
+	app.post(`/${usu}`, (req, res) => 
+	{
+		addUser();
+		async function addUser()
+		{
+			try{
+				const usuariosRetorno = await usuariosDao.adicionaUsuarios([req.body.nome, req.body.email, req.body.senha]);
+				res.status(200).send(usuariosRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                        if(usr._email == req.params.email) resultado.push(usr);
-                };
+	app.delete(`/${usu}/:id`, (req, res) => 
+	{
+		deleteUser();
+		async function deleteUser()
+		{
+			try{
+				const usuariosRetorno = await usuariosDao.deletaUsuarios(req.params.id);
+				res.status(200).send(usuariosRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                resultado != 0 ? res.send(resultado) : res.send("Usuario não encontrado");
-        });
+	app.put(`/${usu}/:id`, (req, res) => 
+	{
+		const parametro = req.params.id;
+		const valuesParametro = [req.body.id, req.body.nome, req.body.email, req.body.senha, req.params.id];
 
-        app.post(`/${usu}`, (req, res) => {
-                const user = new Usuarios(req.body.nome, req.body.email, req.body.senha);
-                bd.usuarios.push(user);
-                console.log(bd);
-                res.send("OK!!!");
-        });
-
-        app.delete(`/${usu}/:email`, (req, res) => {
-                for (let i = 0; i < bd.usuarios.length; i++){
-                        if(bd.usuarios[i]._email==req.params.email)
-                        {
-                                bd.usuarios.splice(i, 1)
-                                res.send(`Usuário com o email ${req.params.email} excluído.`);
-                        };
-                };
-        });
-
-        app.put(`/${usu}/:email`, (req, res) => {
-                for (let i = 0; i < bd.usuarios.length; i++){
-                        if(bd.usuarios[i]._email==req.params.email)
-                        {
-                                bd.usuarios[i]._nome = req.body.nome;
-                                bd.usuarios[i]._email = req.body.email;
-                                bd.usuarios[i]._senha = req.body.senha;
-                                res.send(`Usuário com o email ${req.body.email} foi atualizado.`);
-                        };
-                };
-        });
+		updateUser();
+		async function updateUser()
+		{
+			try{
+				const usuariosRetorno = await usuariosDao.atualizaUsuarios(valuesParametro, parametro);
+				res.status(200).send(usuariosRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 };

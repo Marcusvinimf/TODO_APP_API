@@ -1,51 +1,81 @@
 const tar = 'tarefas';
 
-const Tarefas = require('../models/tarefas_models');
+const TarefasDao = require('../DAO/tarefa_dao');
 
-module.exports = (app, bd )=>{ 
+module.exports = (app, bd) => 
+{
+	const tarefasDao = new TarefasDao(bd);
 
-        app.get(`/${tar}`, (req, res) => res.send(bd.tarefas));
+	app.get(`/${tar}`, (req, res) => 
+	{
+		listaTarefs();
+		async function listaTarefs()
+		{
+			try{
+				const tarefassRetorno = await tarefasDao.listaTarefas();
+				res.send(tarefassRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-        app.get(`/${tar}/:status`, (req, res) =>{
+	app.get(`/${tar}/:id`, (req, res) => 
+	{
+		unicoTarefs();
+		async function unicoTarefs()
+		{
+			try{
+				const tarefassRetorno = await tarefasDao.buscaUnicaTarefas(req.params.id);
+				res.status(200).send(tarefassRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                let resultado = [];
+	app.post(`/${tar}`, (req, res) => 
+	{
+		addTarefs();
+		async function addTarefs()
+		{
+			try{
+				const tarefassRetorno = await tarefasDao.adicionaTarefas([req.body.titulo, req.body.descricao, req.body.status, req.body.dataCriacao, req.body.id_usuario]);
+				res.send(tarefassRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                for(let trf of bd.tarefas)
-                {
+	app.delete(`/${tar}/:id`, (req, res) => 
+	{
+		deleteTarefs();
+		async function deleteTarefs()
+		{
+			try{
+				const tarefassRetorno = await tarefasDao.deletaTarefas(req.params.id);
+				res.send(tarefassRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 
-                        if(trf._status == req.params.status) resultado.push(trf);
-                };
+	app.put(`/${tar}/:id`, (req, res) => 
+	{
+		const parametro = req.params.id;
+		const valuesParametro = [req.body.id, req.body.titulo, req.body.descricao, req.body.status, req.body.dataCriacao, req.body.id_usuario, req.params.id];
 
-                resultado != 0 ? res.send(resultado) : res.send("Tarefa não encontrado");
-        });
-        
-        app.post(`/${tar}`, (req, res) => {
-                const taref = new Tarefas(req.body.titulo, req.body.descricao, req.body.status, req.body.dataDeCriacao);
-                bd.tarefas.push(taref);
-                console.log(bd);
-                res.send("OK!!!");
-        });
-
-        app.delete(`/${tar}/:status`, (req, res) => {
-                for (let i = 0; i < bd.tarefas.length; i++){
-                        if(bd.tarefas[i]._status==req.params.status)
-                        {
-                                bd.tarefas.splice(i, 1)
-                                res.send(`Tarefa com o status ${req.params.status} excluído.`);
-                        };
-                };
-        });
-        
-        app.put(`/${tar}/:status`, (req, res) => {
-                for (let i = 0; i < bd.tarefas.length; i++){
-                        if(bd.tarefas[i]._status==req.params.status)
-                        {
-                                bd.tarefas[i]._titulo = req.body.titulo;
-                                bd.tarefas[i]._descricao = req.body.descricao;
-                                bd.tarefas[i]._status = req.body.status;
-                                bd.tarefas[i]._dataDeCriacao = req.body.dataDeCriacao;
-                                res.send(`Tarefa com o status ${req.body.status} foi atualizado.`);
-                        };
-                };
-        });
+		updateTarefs();
+		async function updateTarefs()
+		{
+			try{
+				const tarefassRetorno = await tarefasDao.atualizaTarefas(valuesParametro, parametro);
+				res.send(tarefassRetorno);
+			}catch{
+				res.send(erro);
+			}
+		}
+	});
 };
