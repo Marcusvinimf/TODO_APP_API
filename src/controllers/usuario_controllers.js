@@ -6,7 +6,7 @@ module.exports = (app, bd) =>
 {
 	const usuariosDao = new UsuariosDao(bd);
 
-	app.get(`/${usu}`, async (req, res) => 
+	app.get(`/`, async (req, res) => 
 	{
 		try{
 			const usuariosRetorno = await usuariosDao.listaUsuarios();
