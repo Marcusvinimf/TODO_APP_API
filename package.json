@@ -15,9 +15,13 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/Projeto.js"
+    "dev": "nodemon ./src/Projeto.js",
+    "start": "node ./src/Projeto.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Marcus Marinho",
+  "license": "ISC",
+  "engines": {
+    "node": "14.x"
+  },
 }

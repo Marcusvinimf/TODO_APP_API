@@ -6,7 +6,7 @@ const usuariosControllers = require('./controllers/usuario_controllers');
 const tarefasControllers = require('./controllers/tarefa_controllers');
 const bd = require('./infra/sqlite-db');
 
-const port = 8080;
+const port = process.env.PORT;
 const app = express();
 
 app.use(bodyParser.json());
