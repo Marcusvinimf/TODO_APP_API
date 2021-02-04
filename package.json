@@ -11,17 +11,16 @@
     "node-fetch": "^2.6.1",
     "sqlite3": "^5.0.1"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "devDependencies": {
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "dev": "nodemon ./src/Projeto.js",
-    "start": "node ./src/Projeto.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/Projeto.js"
   },
   "author": "Marcus Marinho",
   "license": "ISC",
-  "engines": {
-    "node": "14.x"
-  },
 }
