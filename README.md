@@ -39,5 +39,6 @@ Depois de ativar o servidor, acesse: <a><strong>http://localhost:8080</strong></
   
 <strong>Rota para atualizar os dados de 1 tarefa atravês do seu id(chave primaria):</strong> PUT <a>http://localhost:8080/tarefas/id</a>
 
-<h1>Deploy: https://stormy-everglades-35915.herokuapp.com/ </h1>
+<h1>Deploy;</h1>
   
+https://stormy-everglades-35915.herokuapp.com/ 
