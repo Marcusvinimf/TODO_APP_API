@@ -12,7 +12,7 @@ Depois de ativar o servidor, acesse: <a><strong>http://localhost:8080</strong></
 
 <h2>Rotas presentes;</h2> 
   
-<strong>Verbos HTTP REST:<strong> GET, POST, DELETE E PUT.
+<strong>Verbos HTTP REST:</strong> GET, POST, DELETE E PUT.
   
  <h4>Para Usuarios:</h4>
   
