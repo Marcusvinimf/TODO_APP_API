@@ -16,9 +16,15 @@ CREATE TABLE IF NOT EXISTS "USUARIOS" (
 const ADD_USUARIOS_DATA = `
 INSERT INTO USUARIOS (ID, NOME, EMAIL, SENHA)
 VALUES 
-    (1, 'Eugênio Oliveira', 'eugenio.oliveira@bol.com.br', '*******'),
-    (2, 'Olívia Ribeiro', 'olivia.ribeiro@gmail.com', '********'),
-    (3, 'Mirtes Faria Lima', 'mirtes_fl@yahoo.com', '********')
+    (1, 'Lucas', 'lucas.oliveira@bol.com.br', '***'),
+    (2, 'Erica', 'erica.ribeiro@gmail.com', '****'),
+    (3, 'Augusto', 'augusto_fl@yahoo.com', '****'),
+    (4, 'Daniel', 'daniel_fl@yahoo.com', '****'),
+    (5, 'Lorenzo', 'lorenzo_fl@yahoo.com', '****'),
+    (6, 'Bruno', 'bruno_fl@yahoo.com', '****'),
+    (7, 'Marcus', 'marcus_fl@yahoo.com', 'principal'),
+    (8, 'João', 'joão@email.com', '****'),
+    (9, 'Amanda', 'amanda@email.com', 'patroa')
 `
 
 function criaTabelaUsr() {

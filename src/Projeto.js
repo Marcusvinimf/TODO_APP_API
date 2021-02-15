@@ -4,14 +4,16 @@ const cors = require('cors');
 
 const usuariosControllers = require('./controllers/usuario_controllers');
 const tarefasControllers = require('./controllers/tarefa_controllers');
+const indexControllers = require('./controllers/index_controllers');
 const bd = require('./infra/sqlite-db');
 
-const port = process.env.PORT;
+const port = 8080;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
+indexControllers(app);
 usuariosControllers(app, bd);
 tarefasControllers(app, bd);
 
