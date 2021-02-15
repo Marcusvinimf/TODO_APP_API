@@ -8,4 +8,4 @@ Comece com o comando <strong>npm install</strong> para baixar todas as dependên
 
 <h2>Como executar o projeto;</h2>
 
-Depois de ativar o servidor acesse <a><strong>http://localhost:8080</strong></a>
+Depois de ativar o servidor acesse: <a><strong>http://localhost:8080</strong></a> e la tem as instruções para os acessos aos objetos <strong>usuarios</strong> e <strong>tarefas</strong>
