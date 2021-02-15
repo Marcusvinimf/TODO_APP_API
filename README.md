@@ -10,7 +10,7 @@ Comece com o comando <strong>npm install</strong> para baixar todas as dependên
 
 Depois de ativar o servidor, acesse: <a><strong>http://localhost:8080</strong></a> e la tem as instruções para os acessos aos objetos <strong>usuarios</strong> e <strong>tarefas</strong>.
 
-<h2>Rotas presentes;<h2> 
+<h2>Rotas presentes;</h2> 
   
 <strong>Verbos HTTP REST:<strong> GET, POST, DELETE E PUT.
   
