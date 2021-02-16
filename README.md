@@ -41,4 +41,4 @@ Depois de ativar o servidor, acesse: <a><strong>http://localhost:8080</strong></
 
 <h2>Deploy;</h2>
   
-https://stormy-everglades-35915.herokuapp.com/ 
+https://todoappapi-project.herokuapp.com/ 
