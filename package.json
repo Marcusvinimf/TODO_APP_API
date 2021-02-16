@@ -16,9 +16,13 @@
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
   },
+    "engines": {
+      "node": "14.x"
+    },
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./src/Projeto.js"
+    "dev": "nodemon ./src/Projeto.js",
+    "start": "node ./src/Projeto.js"
   },
   "author": "",
   "license": "ISC"
