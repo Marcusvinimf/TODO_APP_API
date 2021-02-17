@@ -10,9 +10,9 @@ module.exports = (app, bd) =>
 	{
 		try{
 			const tarefassRetorno = await tarefasDao.listaTarefas();
-			res.send(tarefassRetorno);
+			res.status(200).send(tarefassRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -22,7 +22,7 @@ module.exports = (app, bd) =>
 			const tarefassRetorno = await tarefasDao.buscaUnicaTarefas(req.params.id);
 			res.status(200).send(tarefassRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -30,9 +30,9 @@ module.exports = (app, bd) =>
 	{
 		try{
 			const tarefassRetorno = await tarefasDao.adicionaTarefas([req.body.titulo, req.body.descricao, req.body.status, req.body.dataCriacao, req.body.id_usuario]);
-			res.send(tarefassRetorno);
+			res.status(201).send(tarefassRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -40,9 +40,9 @@ module.exports = (app, bd) =>
 	{
 		try{
 			const tarefassRetorno = await tarefasDao.deletaTarefas(req.params.id);
-			res.send(tarefassRetorno);
+			res.status(200).send(tarefassRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -53,9 +53,9 @@ module.exports = (app, bd) =>
 
 		try{
 			const tarefassRetorno = await tarefasDao.atualizaTarefas(valuesParametro, parametro);
-			res.send(tarefassRetorno);
+			res.status(200).send(tarefassRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 };

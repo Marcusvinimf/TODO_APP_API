@@ -12,7 +12,7 @@ module.exports = (app, bd) =>
 			const usuariosRetorno = await usuariosDao.listaUsuarios();
 			res.status(200).send(usuariosRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -22,7 +22,7 @@ module.exports = (app, bd) =>
 			const usuariosRetorno = await usuariosDao.buscaUnicaUsuarios(req.params.id);
 			res.status(200).send(usuariosRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -30,9 +30,9 @@ module.exports = (app, bd) =>
 	{
 		try{
 			const usuariosRetorno = await usuariosDao.adicionaUsuarios([req.body.nome, req.body.email, req.body.senha]);
-			res.status(200).send(usuariosRetorno);
+			res.status(201).send(usuariosRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -42,7 +42,7 @@ module.exports = (app, bd) =>
 			const usuariosRetorno = await usuariosDao.deletaUsuarios(req.params.id);
 			res.status(200).send(usuariosRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 
@@ -55,7 +55,7 @@ module.exports = (app, bd) =>
 			const usuariosRetorno = await usuariosDao.atualizaUsuarios(valuesParametro, parametro);
 			res.status(200).send(usuariosRetorno);
 		}catch(erro){
-			res.send(erro);
+			res.status(400).send(erro);
 		}
 	});
 };
