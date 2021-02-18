@@ -20,7 +20,7 @@ test('Rota POST de Tarefas', async ()=>
 {
     await request("http://localhost:8080")
     .post('/tarefas')
-    .expect(200)
+    .expect(201)
     .then( response => ('foi'))
 })
 
